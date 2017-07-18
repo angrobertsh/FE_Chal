@@ -8,11 +8,11 @@ $(function () {
   .mouseup(rangeMouseUp)
   .mousemove(rangeMouseMove);
 
-  $(document).on("mobileinit", function() {
+  if($.support.touch){
     $('.time').on("tap", openTouchModal);
     $('#touch-modal-background').on("tap", closeTouchModal);
     $('#touch-modal-form').submit(checkBoxes);
-  });
+  }
 
 });
 
