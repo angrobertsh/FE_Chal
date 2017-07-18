@@ -3,17 +3,14 @@
  */
 
 $(function () {
-	$('.time')
-	.mousedown(rangeMouseDown)
-	.mouseup(rangeMouseUp)
-	.mousemove(rangeMouseMove);
+  $('.time')
+	.on("mousedown", rangeMouseDown)
+	.on("mouseup", rangeMouseUp)
+	.on("mousemove",rangeMouseMove);
 
-  window.addEventListener('touchstart', function() {
-    alert("touched");
-    $('.time').on("tap", openTouchModal);
-    $('#touch-modal-background').on("tap", closeTouchModal);
-    $('#touch-modal-form').submit(checkBoxes);
-  });
+  document.addEventListener("touchstart", openTouchModal);
+  document.getElementById("touch-modal-background").addEventListener("touchstart", closeTouchModal);
+  $('#touch-modal-form').submit(checkBoxes);
 
 });
 
@@ -190,7 +187,9 @@ function isRightClick(e) {
 }
 
 function openTouchModal(e){
-  $('#touch-modal').removeClass('hidden');
+  if(e.target.classList[0] === "tap"){
+    $('#touch-modal').removeClass('hidden');
+  }
 }
 
 function closeTouchModal(e){
