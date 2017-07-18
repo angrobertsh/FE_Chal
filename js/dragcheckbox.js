@@ -7,7 +7,17 @@ $(function () {
 	.mousedown(rangeMouseDown)
 	.mouseup(rangeMouseUp)
 	.mousemove(rangeMouseMove);
+
+  window.addEventListener('touchstart', function() {
+    $('.time').on("tap", openTouchModal);
+    $('#touch-modal-background').on("tap", closeTouchModal);
+    $('#touch-modal-form').submit(checkBoxes);
+  });
+
 });
+
+
+
 
 var dragStart = 0;
 var dragEnd = 0;
@@ -179,4 +189,38 @@ function isRightClick(e) {
 		return (e.button == 2);
 	}
 	return false;
+}
+
+function openTouchModal(e){
+  $('#touch-modal').removeClass('hidden');
+}
+
+function closeTouchModal(e){
+  $('#touch-modal').addClass('hidden');
+}
+
+function checkBoxes(e){
+  e.preventDefault();
+
+  var startStr = "#" + $('#start-date').val() + $('#start-time').val();
+  var endStr = "#" + $('#end-date').val() + $('#end-time').val();
+
+  var startIdx = $(":checkbox").index($(".time").find(startStr))
+  var endIdx = $(":checkbox").index($(".time").find(endStr))
+
+  if(endIdx < startIdx){
+    for(var i = startIdx; i < $(":checkbox").length; i += 1){
+      $($(":checkbox")[i]).prop('checked', true);
+    }
+    for(var j = 1; j < endIdx; j += 1){
+      $($(":checkbox")[j]).prop('checked', true);
+    }
+  } else {
+    for(var i = startIdx; i < endIdx; i += 1){
+      $($(":checkbox")[i]).prop('checked', true);
+    }
+  }
+
+  closeTouchModal();
+
 }
