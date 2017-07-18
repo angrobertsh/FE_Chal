@@ -3,21 +3,18 @@
  */
 
 $(function () {
-	$('.time')
-	.mousedown(rangeMouseDown)
-	.mouseup(rangeMouseUp)
-	.mousemove(rangeMouseMove);
+  $('.time')
+  .mousedown(rangeMouseDown)
+  .mouseup(rangeMouseUp)
+  .mousemove(rangeMouseMove);
 
-  window.addEventListener('touchstart', function() {
+  $(document).on("mobileinit", function() {
     $('.time').on("tap", openTouchModal);
     $('#touch-modal-background').on("tap", closeTouchModal);
     $('#touch-modal-form').submit(checkBoxes);
   });
 
 });
-
-
-
 
 var dragStart = 0;
 var dragEnd = 0;
